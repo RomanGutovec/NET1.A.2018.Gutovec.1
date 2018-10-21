@@ -1,7 +1,8 @@
-﻿namespace NET1.A._2018.Gutovec._1.Tests
-{
-using System;
+﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace NET1.A._2018.Gutovec._1.Tests
+{
     [TestClass]
     public class MergeSortTests
     {
@@ -10,14 +11,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
         [TestMethod]
         public void MergeSortingMethod_UnsortedArray_17_neg15_0_36_1500_ReturnedArray_neg15_0_17_36_1500()
         {
-            ////Arrange
             int[] expectedArray = { -15, 0, 17, 36, 1500 };
             int[] actualArray = { 17, -15, 0, 36, 1500 };
 
-            ////Act
-            actualArray = QuickSortMergeSortLib.MergeSort.MergeSorting(actualArray);
+            actualArray = QuickSortMergeSortLib.SortQuickAndMerge.MergeSort(actualArray);
 
-            ////Assert
             for (int i = 0; i < expectedArray.Length; i++)
             {
                 Assert.AreEqual(expectedArray[i], actualArray[i]);
@@ -27,8 +25,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
         [TestMethod]
         public void MergeSortingMethod_CompareTwoArraysWithLength10000000FilledRandomNumbers_SortedByMethodArraySortandQuickSorting_ReturnedSortedArray()
         {
-            ////Arrange
-            int capasity = 1000000;
+            int capasity = 100000;
             int[] expectedArray = new int[capasity];
 
             for (int i = 0; i < expectedArray.Length; i++)
@@ -39,11 +36,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
             int[] actualArray = new int[capasity];
             Array.Copy(expectedArray, actualArray, expectedArray.Length);
 
-            ////Act
-            actualArray = QuickSortMergeSortLib.MergeSort.MergeSorting(actualArray);
+            actualArray = QuickSortMergeSortLib.SortQuickAndMerge.MergeSort(actualArray);
             Array.Sort(expectedArray);
 
-            ////Assert
             int index = rnd.Next(0, capasity);
             Assert.AreEqual(expectedArray[index], actualArray[index]);
         }
@@ -51,6 +46,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void MergeSortingMethod_ArrayEqualsNull_ThrowArgumentNullException()
-                => QuickSortMergeSortLib.MergeSort.MergeSorting(null);
+                => QuickSortMergeSortLib.SortQuickAndMerge.MergeSort(null);
     }
 }
