@@ -6,10 +6,9 @@ using System.Text;
 namespace QuickSortMergeSortLib
 {
     /// <summary>
-    /// Sorting array by merging of 
-    /// consists parts
+    /// Sorting array by methods Quick and Merging
     /// </summary>
-    public static class SortQuickAndMerge
+    public static class SortQuickAndMerge<T> where T :  IComparable<T>
     {
         /// <summary>
         /// Sorts source array by method 
@@ -17,17 +16,19 @@ namespace QuickSortMergeSortLib
         /// </summary>
         /// <exception cref="ArgumentNullException">Thrown when array have null value</exception>
         /// <param name="array">source array which must be sorted</param>
-        public static void QuickSort(int[] array)
+        public static void QuickSort(T[] array)
         {
             if (array == null)
             {
                 throw new ArgumentNullException($"{nameof(array)} haves null value");
             }
 
-            if (array.Length > 1)
+            if (array.Length <= 1)
             {
-                SortPartsArrays(array, 0, array.Length - 1);
+                throw new ArgumentException($"{nameof(array)} is empty");
             }
+            
+                SortPartsArrays(array, 0, array.Length - 1);
         }
 
         /// <summary>
@@ -37,7 +38,7 @@ namespace QuickSortMergeSortLib
         /// <exception cref="ArgumentNullException">Thrown when array have null value</exception>
         /// <param name="arr">source array which must be sorted</param>
         /// <returns>sorted source array</returns>
-        public static int[] MergeSort(int[] array)
+        public static T[] MergeSort(T[] array)
         {
             if (array == null)
             {
@@ -49,8 +50,8 @@ namespace QuickSortMergeSortLib
                 return array;
             }
 
-            List<int> left = new List<int>();
-            List<int> right = new List<int>();
+            List<T> left = new List<T>();
+            List<T> right = new List<T>();
 
             for (int i = 0; i < array.Length; i++)
             {
@@ -75,7 +76,7 @@ namespace QuickSortMergeSortLib
         /// <param name="array">source array</param>
         /// <param name="left">index of start</param>
         /// <param name="right">index of end</param>
-        private static void SortPartsArrays(int[] array, int left, int right)
+        private static void SortPartsArrays(T[] array, int left, int right)
         {
             if (left == right)
             {
@@ -84,14 +85,14 @@ namespace QuickSortMergeSortLib
 
             int first = left + 1;
             int second = right;
-            int pivot = array[left];
+            T pivot = array[left];
             while (first < second)
             {
-                if (array[first] <= pivot)
+                if (array[first].CompareTo(pivot) <= 0)
                 {
                     first++;
                 }
-                else if (array[second] > pivot)
+                else if (array[second].CompareTo(pivot) > 0)
                 {
                     second--;
                 }
@@ -101,7 +102,7 @@ namespace QuickSortMergeSortLib
                 }
             }
 
-            if (array[second] <= pivot)
+            if (array[second].CompareTo(pivot) <= 0)
             {
                 Swap(ref array[left], ref array[right]);
                 SortPartsArrays(array, left, right - 1);
@@ -120,12 +121,12 @@ namespace QuickSortMergeSortLib
         /// <param name="left" >left part of array</param>
         /// <param name="right" >right part of array</param>
         /// <returns>sorted array</returns>
-        private static int[] Merge(List<int> left, List<int> right)
+        private static T[] Merge(List<T> left, List<T> right)
         {
-            List<int> result = new List<int>();
+            List<T> result = new List<T>();
             while (left.Count > 0 && right.Count > 0)
             {
-                if (left.First() <= right.First())
+                if (left.First().CompareTo(right.First()) <= 0)
                 {
                     result.Add(left.First());
                     left.RemoveAt(0);
@@ -152,9 +153,9 @@ namespace QuickSortMergeSortLib
             return result.ToArray();
         }
 
-        private static void Swap(ref int first, ref int second)
+        private static void Swap(ref T first, ref T second)
         {
-            int temp = first;
+            T temp = first;
             first = second;
             second = temp;
         }

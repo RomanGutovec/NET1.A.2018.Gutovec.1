@@ -18,8 +18,8 @@
     </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>false</DebugSymbols>
-    <DebugType>none</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BinarySearchAlgorithmTests.cs" />
     <Compile Include="MergeSortNunitTests.cs" />
     <Compile Include="QuickSortNUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -56,9 +57,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\QuickSortMergeSortLib\QuickSortMergeSortLib.csproj">
-      <Project>{978d0e22-df33-4484-91da-75d484270897}</Project>
-      <Name>QuickSortMergeSortLib</Name>
+    <ProjectReference Include="..\Algorithms\Algorithms.csproj">
+      <Project>{b2256ccd-231c-4eb4-b6a1-05951b4b3cff}</Project>
+      <Name>Algorithms</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -12,7 +12,7 @@ namespace NET1.A._2018.Gutovec._1.Tests
         [TestMethod]
         public void QuickSortingMethod_CompareTwoArraysWithLength10000000FilledRandomNumbers_SortedByMethodArraySortandQuickSorting_ReturnedSortedArray()
         {
-            int capasity = 1000000;
+            int capasity = 10;
             int[] expectedArray = new int[capasity];
 
             for (int i = 0; i < expectedArray.Length; i++)
@@ -23,7 +23,7 @@ namespace NET1.A._2018.Gutovec._1.Tests
             int[] actualArray = new int[capasity];
             Array.Copy(expectedArray, actualArray, expectedArray.Length);
 
-            QuickSortMergeSortLib.SortQuickAndMerge.QuickSort(actualArray);
+            Algorithms.SortQuickAndMerge<int>.QuickSort(actualArray);
             Array.Sort(expectedArray);
 
             int index = this.rnd.Next(0, capasity);
@@ -36,17 +36,17 @@ namespace NET1.A._2018.Gutovec._1.Tests
             int[] expectedArray = { -17, 0, 15, 35, 48 };
             int[] actualArray = { 15, 35, 48, -17, 0 };
 
-            QuickSortMergeSortLib.SortQuickAndMerge.QuickSort(actualArray);
+            Algorithms.SortQuickAndMerge<int>.QuickSort(actualArray);
 
             for (int i = 0; i < expectedArray.Length; i++)
             {
-                Assert.AreEqual(actualArray[i], expectedArray[i]);
+                Assert.AreEqual(expectedArray[i],actualArray[i]);
             }
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void QuickSortingMethod_ArrayEqualsNull_ThrowArgumentNullException()
-        => QuickSortMergeSortLib.SortQuickAndMerge.QuickSort(null);
+        => Algorithms.SortQuickAndMerge<int>.QuickSort(null);
     }
 }

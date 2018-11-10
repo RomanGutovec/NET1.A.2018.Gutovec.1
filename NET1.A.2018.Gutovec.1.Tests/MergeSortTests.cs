@@ -14,7 +14,7 @@ namespace NET1.A._2018.Gutovec._1.Tests
             int[] expectedArray = { -15, 0, 17, 36, 1500 };
             int[] actualArray = { 17, -15, 0, 36, 1500 };
 
-            actualArray = QuickSortMergeSortLib.SortQuickAndMerge.MergeSort(actualArray);
+            actualArray = Algorithms.SortQuickAndMerge<int>.MergeSort(actualArray);
 
             for (int i = 0; i < expectedArray.Length; i++)
             {
@@ -36,7 +36,7 @@ namespace NET1.A._2018.Gutovec._1.Tests
             int[] actualArray = new int[capasity];
             Array.Copy(expectedArray, actualArray, expectedArray.Length);
 
-            actualArray = QuickSortMergeSortLib.SortQuickAndMerge.MergeSort(actualArray);
+            actualArray = Algorithms.SortQuickAndMerge<int>.MergeSort(actualArray);
             Array.Sort(expectedArray);
 
             int index = rnd.Next(0, capasity);
@@ -46,6 +46,6 @@ namespace NET1.A._2018.Gutovec._1.Tests
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void MergeSortingMethod_ArrayEqualsNull_ThrowArgumentNullException()
-                => QuickSortMergeSortLib.SortQuickAndMerge.MergeSort(null);
+                => Algorithms.SortQuickAndMerge<int>.MergeSort(null);
     }
 }
